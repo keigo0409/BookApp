@@ -64,14 +64,14 @@ class UpdateBookView(LoginRequiredMixin,generic.UpdateView):
     template_name = 'book/book_update.html'
     model = Shelf
     context_object_name = 'Shelf'
-    fields = ('title', 'text', 'category','thumbnail')
+    fields = ('title', 'text', 'category', 'thumbnail')
     success_url = reverse_lazy('list-book')
 
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
         if obj.user != self.request.user:
             raise PermissionDenied('編集権限がありません。')
-        return super(UpdateView, self).dispatch(request, *args, **kwargs)
+        return super(UpdateBookView, self).dispatch(request, *args, **kwargs)
 
 
 class CreateReviewView(LoginRequiredMixin,generic.CreateView):
